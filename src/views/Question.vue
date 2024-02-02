@@ -37,19 +37,10 @@ export default {
         selectedPoint.point = point;
       }
       console.log(this.userPoint);
-      this.step++;
-    },
-    calculateTotalScore() {
-      const totalScore = this.userPoint.reduce((total, question) => {
-        return total + question.point;
-      }, 0);
-    },
-    nextQuestion() {
       if (this.step < this.questions.length) {
         this.step++;
       } else {
         this.calculateTotalScore();
-
         // เพิ่มเงื่อนไขตามคะแนนที่ได้รับ
         const totalScore = this.userPoint.reduce((total, question) => {
           return total + question.point;
@@ -66,6 +57,14 @@ export default {
           this.$router.push("/hobbyish");
         }
       }
+    },
+    calculateTotalScore() {
+      const totalScore = this.userPoint.reduce((total, question) => {
+        return total + question.point;
+      }, 0);
+    },
+    nextQuestion() {
+      
     },
   },
   data() {
