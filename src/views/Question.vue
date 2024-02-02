@@ -1,8 +1,9 @@
 <template lang="">
+    <head><link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Kanit"></head>
     <div class="forquestion">
         <div class="card">
             <div class="container">
-                <h4><b>Q {{step}}</b></h4>
+                <h5><b>Q {{step}}</b></h5>
                 <p>{{currentQuestion.question}}</p>
             </div>
             <div class="answer">
@@ -17,7 +18,7 @@
         </div>
         <form>
     <label class="next">
-      <input type="button" class="nextbutton" value = "ต่อไป" @click="this.step++">
+      <input type="button" class="nextbutton" value = "ต่อไป" @click="nextQuestion">
     </label>
     <label class="back">
       <input type="button" class="backbutton" value = "กลับ" @click="this.step--">
@@ -38,10 +39,38 @@ export default {
       console.log(this.userPoint);
       this.step++;
     },
+    calculateTotalScore() {
+      const totalScore = this.userPoint.reduce((total, question) => {
+        return total + question.point;
+      }, 0);
+    },
+    nextQuestion() {
+      if (this.step < this.questions.length) {
+        this.step++;
+      } else {
+        this.calculateTotalScore();
+
+        // เพิ่มเงื่อนไขตามคะแนนที่ได้รับ
+        const totalScore = this.userPoint.reduce((total, question) => {
+          return total + question.point;
+        }, 0);
+
+        if (totalScore >= 131 && totalScore <= 180) {
+          // Redirect ไปยัง GradualView.vue
+          this.$router.push("/gradual");
+        } else if (totalScore >= 91 && totalScore <= 130) {
+          // Redirect ไปยัง EnthusView.vue
+          this.$router.push("/enthus");
+        } else if (totalScore >= 60 && totalScore <= 90) {
+          // Redirect ไปยัง HobbyishView.vue
+          this.$router.push("/hobbyish");
+        }
+      }
+    },
   },
   data() {
     return {
-      step: 1,
+      step:1,
       questions: [
         {
           questionId: 1,
@@ -64,7 +93,7 @@ export default {
           question: "คุณต้องการพัฒนาภาษาอังกฤษเพื่ออะไร?",
           option1: {
             answer: "การทำงาน",
-            point: 0,
+            point: 30,
           },
           option2: {
             answer: "เที่ยวต่างประเทศ",
@@ -72,7 +101,7 @@ export default {
           },
           option3: {
             answer: "ใช้ในชีวิตประจำวัน",
-            point: 0,
+            point: 20,
           },
         },
         {
@@ -80,15 +109,15 @@ export default {
           question: "สไตล์การเรียนภาษาอังกฤษของคุณเป็นแบบไหน?",
           option1: {
             answer: "เรียนคอร์สออนไลน์ / โรงเรียนสอนภาษา",
-            point: 0,
+            point: 30,
           },
           option2: {
             answer: "เรียนด้วยตนเอง เช่น อ่านหนังสือ ดูหนัง ฟังเพลง",
-            point: 10,
+            point: 20,
           },
           option3: {
             answer: "คุยกับเพื่อนต่างชาติ / ไปเที่ยวต่างประเทศ",
-            point: 0,
+            point: 10,
           },
         },
         {
@@ -96,7 +125,7 @@ export default {
           question: "คุณใช้ภาษาอังกฤษบ่อยแค่ไหน?",
           option1: {
             answer: "เป็นประจำทุกวัน",
-            point: 0,
+            point: 30,
           },
           option2: {
             answer: "เป็นบางครั้ง",
@@ -104,7 +133,7 @@ export default {
           },
           option3: {
             answer: "นาน ๆ ที / ไม่ได้ใช้เลย",
-            point: 0,
+            point: 20,
           },
         },
         {
@@ -112,7 +141,7 @@ export default {
           question: "คุณอยากพัฒนาสกิลภาษาอังกฤษสกิลไหนมากที่สุด?",
           option1: {
             answer: "การฟัง",
-            point: 0,
+            point: 20,
           },
           option2: {
             answer: "การพูด",
@@ -120,7 +149,7 @@ export default {
           },
           option3: {
             answer: "การเขียน",
-            point: 0,
+            point: 30,
           },
         },
         {
@@ -128,7 +157,7 @@ export default {
           question: "อยากเรียนภาษาอังกฤษ แต่...",
           option1: {
             answer: "ไม่มีเวลา",
-            point: 0,
+            point: 20,
           },
           option2: {
             answer: "เนื้อหาไม่น่าสนใจ / สอนไม่สนุก",
@@ -136,7 +165,7 @@ export default {
           },
           option3: {
             answer: "ไม่มั่นใจ",
-            point: 0,
+            point: 30,
           },
         },
       ],

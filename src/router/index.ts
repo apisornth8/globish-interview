@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/startPage',
       name: 'home',
-      component: () => import('../views/index.vue')
+      component: () => import('../views/StartPage.vue')
     },
     {
       path: '/question',
@@ -14,35 +14,26 @@ const router = createRouter({
       component: () => import('../views/question.vue')
     },
     {
-      path: '/knownquestion',
-      name: 'knownQuestion',
-      component: () => import('../views/knownQuestion.vue')
+      path: '/question7',
+      name: 'question7',
+      component: () => import('../views/Question7.vue')
     },
-    // {
-    //   path: '/question3',
-    //   name: 'question',
-    //   component: () => import('../views/question3.vue')
-    // },
-    // {
-    //   path: '/question4',
-    //   name: 'question',
-    //   component: () => import('../views/question4.vue')
-    // },
-    // {
-    //   path: '/question5',
-    //   name: 'question',
-    //   component: () => import('../views/question5.vue')
-    // },
-    // {
-    //   path: '/question5',
-    //   name: 'question',
-    //   component: () => import('../views/question6.vue')
-    // },
     {
-      path: '/summary',
-      name: 'summary',
-      component: () => import('../views/summary.vue')
-    }
+      path: '/gradual',
+      name: 'gradual',
+      component: () => import('../views/GradualView.vue')
+    },
+    {
+      path: '/enthus',
+      name: 'enthus',
+      component: () => import('../views/EnthusView.vue')
+    },
+    {
+      path: '/hobbyish',
+      name: 'hobbyish',
+      component: () => import('../views/HobbyishView.vue')
+    },
+    
   ]
 })
 
